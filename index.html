@@ -13,13 +13,10 @@
       <div id="app" class="wrapper">
         <div>
           <h1>BF4 Weapon DPS Stats</h1>
-          <table v-for="category in weapons">
+          <table>
             <thead>
               <tr>
-                <th
-                  v-for="(value, key) in columns"
-                  v-on:click="sort(category,key)"
-                >
+                <th v-for="(value, key) in columns" v-on:click="sort(key)">
                   {{ value }}
                 </th>
               </tr>
@@ -27,7 +24,7 @@
             <tbody>
               <tr v-for="task in tasks">
                 <td v-for="(value, key) in columns">
-                  {{ weapons[category][key] }}
+                  {{ task[key] }}
                 </td>
               </tr>
             </tbody>
