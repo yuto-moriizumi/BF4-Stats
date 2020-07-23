@@ -4,30 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Document</title>
   </head>
 
   <body>
-    <div id="app">
-      <table>
-        <thead>
-          <tr>
-            <th v-for="(value, key) in columns" v-on:click="sort(key)">
-              {{ value }}
-            </th>
-            <th>DPS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="task in tasks">
-            <td v-for="(value, key) in columns">
-              {{ task[key] }}
-            </td>
-            <td>{{Math.round(task["mad"]*task["rpm"]/60)}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <main>
+      <div id="app" class="wrapper">
+        <div>
+          <h1>BF4 Weapon DPS Stats</h1>
+          <table v-for="category in weapons">
+            <thead>
+              <tr>
+                <th
+                  v-for="(value, key) in columns"
+                  v-on:click="sort(category,key)"
+                >
+                  {{ value }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="task in tasks">
+                <td v-for="(value, key) in columns">
+                  {{ weapons[category][key] }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13"></script>
     <script src="./js.js"></script>
   </body>

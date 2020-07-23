@@ -11,14 +11,19 @@ class Weapon {
     this.speed = parseInt(data[7]);
   }
 
-  ddps = () => this.mad * this.rpm;
+  get mdps() {
+    return Math.round((this.mad * this.rpm) / 60);
+  }
 }
+
+let currentSort = "id";
+let asc = true;
 
 const app = new Vue({
   el: "#app",
   data: {
     columns: {
-      id: "ID",
+      id: "ID ▲",
       name: "件名",
       category: "カテゴリ",
       mad: "最大ダメージ",
@@ -26,39 +31,35 @@ const app = new Vue({
       rpm: "RPM",
       ammo: "装填数",
       speed: "弾速",
+      mdps: "最大DPS",
     },
-    tasks: [
-      {
-        id: 1,
-        subject: "AK-12(B)",
-        category: "アサルトライフル",
-        mad: 24.5,
-        mid: 18,
-        rpm: 750,
-        ammo: 31,
-      },
-      {
-        id: 2,
-        subject: "AK-12",
-        category: "アサルトライフル",
-        mad: 24.5,
-        mid: 18,
-        rpm: 650,
-        ammo: 31,
-      },
-    ],
+    tasks: [],
   },
   methods: {
     sort(key) {
+      //カラム名についている▲マークを取る
+      this.columns[currentSort] = this.columns[currentSort].slice(0, -2);
+      if (currentSort == key) asc = !asc;
+      //もし既にソートしているカラムを選択したら、昇順と降順を入れ替える
+      else asc = true; //そうでない場合は昇順
+      this.columns[key] += asc ? " ▲" : " ▼"; //アイコンを付ける
+      currentSort = key;
+
+      //選択ソート
       for (let i = 0; i < this.tasks.length; i++) {
         minj = i;
         for (let j = i + 1; j < this.tasks.length; j++) {
-          if (this.tasks[minj][key] > this.tasks[j][key]) minj = j;
+          if (
+            (asc && this.tasks[minj][key] > this.tasks[j][key]) ||
+            (!asc && this.tasks[minj][key] < this.tasks[j][key])
+          )
+            minj = j;
         }
         const t = this.tasks[i];
-        this.$set(this.tasks, i, this.tasks[minj]);
+        this.$set(this.tasks, i, this.tasks[minj]); //オブジェクトを操作するときは$setを使う必要がある
         this.$set(this.tasks, minj, t);
       }
+
       console.log("sorted!", this.tasks);
     },
     loadTsv(tsv) {
