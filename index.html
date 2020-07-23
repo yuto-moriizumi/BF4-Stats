@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <table>
+        <thead>
+          <tr>
+            <th v-for="(value, key) in columns" v-on:click="sort(key)">
+              {{ value }}
+            </th>
+            <th>DPS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="task in tasks">
+            <td v-for="(value, key) in columns">
+              {{ task[key] }}
+            </td>
+            <td>{{Math.round(task["mad"]*task["rpm"]/60)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13"></script>
+    <script src="./js.js"></script>
+  </body>
+</html>
