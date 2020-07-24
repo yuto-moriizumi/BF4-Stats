@@ -10,30 +10,16 @@
 
   <body>
     <main>
-      <div id="app" class="wrapper">
-        <div>
+      <div class="wrapper">
+        <div id="app">
           <h1>BF4 Weapon DPS Stats</h1>
-          <table>
-            <thead>
-              <tr>
-                <th v-for="(value, key) in columns" v-on:click="sort(key)">
-                  {{ value }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="task in tasks">
-                <td v-for="(value, key) in columns">
-                  {{ task[key] }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <sortable-table category="アサルトライフル"></sortable-table>
         </div>
       </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13"></script>
+    <script src="./sortableTable.js"></script>
     <script src="./js.js"></script>
   </body>
 </html>
