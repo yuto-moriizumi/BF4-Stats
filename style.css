@@ -1,11 +1,36 @@
-table,
-th,
-td {
-  border: 1px solid #000000;
+tr {
+  border-bottom: 1px solid #ffffff;
 }
 
-.wrapper {
+.flex {
   display: flex;
   justify-content: center;
+  justify-content: space-evenly;
   text-align: center;
+  flex-wrap: wrap;
+}
+
+.flex table {
+  margin-bottom: 2em;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+caption {
+  font-size: 2em;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  font-size: 3.5em;
+}
+
+body {
+  background-color: #191919;
+  color: #ffffff;
+  font-size: 1.2em;
+  margin: 0 10% 0;
 }

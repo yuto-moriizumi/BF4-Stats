@@ -18,6 +18,7 @@ class Weapon {
 
 const sortableTable = Vue.component("sortable-table", {
   template: `          <table>
+  <caption>{{category}}</caption>
     <thead>
       <tr>
         <th v-for="(value, key) in columns" v-on:click="sort(key)">

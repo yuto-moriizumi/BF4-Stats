@@ -10,11 +10,12 @@
 
   <body>
     <main>
-      <div class="wrapper">
-        <div id="app">
-          <h1>BF4 Weapon DPS Stats</h1>
-          <sortable-table category="アサルトライフル"></sortable-table>
-        </div>
+      <h1 class="title">BF4 Weapon DPS Stats</h1>
+      <div id="app" class="flex">
+        <sortable-table
+          v-for="category of categories"
+          v-bind:category="category"
+        ></sortable-table>
       </div>
     </main>
 
