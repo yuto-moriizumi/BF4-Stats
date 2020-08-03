@@ -26,13 +26,13 @@ const sortableTable = Vue.component("sortable-table", {
         </th>
       </tr>
     </thead>
-    <tbody>
-      <tr v-for="task in weapons">
+    <transition-group name="items" tag="tbody">
+      <tr v-for="task in weapons" v-bind:key="task['id']">
         <td v-for="(value, key) in columns">
           {{ task[key] }}
         </td>
       </tr>
-    </tbody>
+    </transition-group>
   </table>`,
   props: ["category"],
   data: function () {
